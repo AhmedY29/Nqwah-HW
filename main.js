@@ -1,3 +1,55 @@
+let productsContent = document.getElementById("products-content");
+
+fetch("https://fakestoreapi.com/products")
+  .then((res) => res.json())
+  .then((data) =>
+    data.map((item) => {
+      productsContent.innerHTML += `
+            <div
+          style="cursor: pointer; width: 15em ; height:30em"
+          class="product-item border p-4 rounded-4 position-relative"
+        >
+          <div class="product-img">
+            <img
+              src=${item.image}
+              alt=""
+              width="150"
+              height="200"
+              class="object-fit-contain"
+            />
+            <img
+              class="position-absolute top-0 end-0 me-2 mt-2"
+              src="https://img.icons8.com/?size=100&id=86&format=png&color=000000"
+              width="25"
+              alt=""
+            />
+          </div>
+          <div
+            class="first-t d-flex justify-content-between align-items-center my-2"
+          >
+            <div
+              style="background-color: rgba(255, 255, 0, 0.205)"
+              class="product-price"
+            >
+              <h4 class="m-0">$${item.price}</h4>
+            </div>
+            <div class="product-rate">
+              <h6>${item.rating.rate}⭐</h6>
+            </div>
+          </div>
+
+          <div class="product-title">
+            <p class="fw-bold">
+              ${item.title}
+            </p>
+          </div>
+          <div class="product-action d-flex justify-content-center position-absolute bottom-0 mb-3">
+            <button class="btn btn-primary">أضف الى السلة</button>
+          </div>
+        </div>`;
+    })
+  );
+
 // Confirm Password && Save User in Local Storage
 
 let password = document.getElementById("password");
@@ -63,56 +115,3 @@ function logout() {
   localStorage.setItem("user", userString);
   window.location.href = "./index.html";
 }
-
-let productsContent = document.getElementById("products-content");
-
-fetch("https://fakestoreapi.com/products")
-  .then((res) => res.json())
-  .then((data) =>
-    data.map((item) => {
-      // let itemDiv = document.createElement('div')
-      productsContent.innerHTML += `
-            <div
-          style="cursor: pointer; width: 15em ; height:30em"
-          class="product-item border p-4 rounded-4 position-relative"
-        >
-          <div class="product-img">
-            <img
-              src=${item.image}
-              alt=""
-              width="150"
-              height="200"
-              class="object-fit-contain"
-            />
-            <img
-              class="position-absolute top-0 end-0 me-2 mt-2"
-              src="https://img.icons8.com/?size=100&id=86&format=png&color=000000"
-              width="25"
-              alt=""
-            />
-          </div>
-          <div
-            class="first-t d-flex justify-content-between align-items-center my-2"
-          >
-            <div
-              style="background-color: rgba(255, 255, 0, 0.205)"
-              class="product-price"
-            >
-              <h4 class="m-0">$${item.price}</h4>
-            </div>
-            <div class="product-rate">
-              <h6>${item.rating.rate}⭐</h6>
-            </div>
-          </div>
-
-          <div class="product-title">
-            <p class="fw-bold">
-              ${item.title}
-            </p>
-          </div>
-          <div class="product-action d-flex justify-content-center position-absolute bottom-0 mb-3">
-            <button class="btn btn-primary">أضف الى السلة</button>
-          </div>
-        </div>`;
-    })
-  );
